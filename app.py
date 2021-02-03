@@ -23,6 +23,7 @@ class File(db.Model):
 def mainPage(filename):
     data = flask.request.get_data()
     db.session.add(File(filename=filename, filebytes=data))
+    print(len(data))
     db.session.commit()
     return "File Uploaded Successfully"
 
@@ -30,5 +31,4 @@ def mainPage(filename):
 @app.route("/filereturn/<filename>")
 def returnFile(filename):
     file = File.query.filter_by(filename=filename).first()
-    print(len(file.filebytes))
     return file.filebytes
