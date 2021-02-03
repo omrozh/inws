@@ -12,7 +12,7 @@ if option == "upload":
     response = request.urlopen(req)
 
     response_read = response.read()
-    print(response_read)
+    print(response_read.decode("utf-8"))
 
 elif option == "download":
     save_path = sys.argv[3]
