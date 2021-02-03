@@ -14,11 +14,14 @@ class File(db.Model):
     filebytes = db.Column(db.String, nullable=False)
     filename = db.Column(db.String, unique=True, nullable=False)
 
+    def __repr__(self):
+        return self.filebytes
+
 
 @app.route("/<filename>", methods=["POST", "GET"])
 def mainPage(filename):
     data = flask.request.get_data()
-    db.session.add(File(filename=filename, filebytes=str(data.decode)))
+    db.session.add(File(filename=filename, filebytes=str(data)))
     db.session.commit()
     return "File Uploaded Successfully"
 
