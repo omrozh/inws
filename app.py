@@ -29,4 +29,4 @@ def mainPage(filename):
 @app.route("/filereturn/<filename>")
 def returnFile(filename):
     file = File.query.filter_by(filename=filename).first()
-    return str.encode(file.filebytes)
+    return file.filebytes
