@@ -18,7 +18,7 @@ elif option == "download":
     save_path = sys.argv[3]
     response = request.urlopen(f"http://storagerequests.herokuapp.com/filereturn/{argument}")
     read_response = response.read()
-    print(len(read_response))
+    print(read_response)
     save = open(save_path, "wb")
     save.write(read_response)
     save.close()
