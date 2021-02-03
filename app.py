@@ -30,5 +30,5 @@ def mainPage(filename):
 @app.route("/filereturn/<filename>")
 def returnFile(filename):
     file = File.query.filter_by(filename=filename).first()
-    print(file.filebytes)
+    print(len(file.filebytes))
     return file.filebytes
