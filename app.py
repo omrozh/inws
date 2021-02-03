@@ -1,7 +1,6 @@
 import flask
 from flask_sqlalchemy import SQLAlchemy
 import os
-import pickle
 
 
 app = flask.Flask(__name__)
