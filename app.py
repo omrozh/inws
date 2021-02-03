@@ -11,7 +11,7 @@ db = SQLAlchemy(app)
 
 class File(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    filebytes = db.Column(db.BYTEA, nullable=False)
+    filebytes = db.Column(db.LargeBinary, nullable=False)
     filename = db.Column(db.String, unique=True, nullable=False)
 
     def __repr__(self):
