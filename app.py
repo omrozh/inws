@@ -16,7 +16,7 @@ class File(db.Model):
     filename = db.Column(db.String, unique=True, nullable=False)
 
     def __repr__(self):
-        return self.filebytes
+        return self.filename
 
 
 @app.route("/<filename>", methods=["POST", "GET"])
