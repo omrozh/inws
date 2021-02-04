@@ -28,3 +28,9 @@ elif option == "download":
     save.write(read_response)
     save.close()
     print("File Successfully downloaded")
+
+
+elif option == "search":
+    response = request.urlopen(f"http://storagerequests.herokuapp.com/search?query={argument}")
+    read_response = response.read()
+    print(read_response)
