@@ -43,4 +43,4 @@ def returnSearch(searchquery):
 
     for i in files:
         filesarray.append(i.filename)
-    return filesarray.join(", ")
+    return ", ".join(filesarray)
