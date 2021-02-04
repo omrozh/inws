@@ -8,8 +8,14 @@ if option == "upload":
     load = open(argument, "rb")
     load_read = load.read()
 
+    print("Reading file.")
+
     req = request.Request(f"http://storagerequests.herokuapp.com/{input('Filename: ')}", data=load_read)
+
+    print("POST Request is formed.")
     response = request.urlopen(req)
+
+    print("Process completed. Response received from the server.")
 
     response_read = response.read()
     print(response_read.decode("utf-8"))
