@@ -31,6 +31,6 @@ elif option == "download":
 
 
 elif option == "search":
-    response = request.urlopen(f"http://storagerequests.herokuapp.com/search?query={argument}")
+    response = request.urlopen(f"http://storagerequests.herokuapp.com/search/{argument}")
     read_response = response.read()
     print(read_response)
