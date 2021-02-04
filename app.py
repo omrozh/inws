@@ -39,5 +39,6 @@ def returnFile(filename):
 @app.route("/search?query=<searchquery>")
 def returnSearch(searchquery):
     files = File.query.filter(File.searchtitle.like('%' + searchquery.lower() + '%'))
-    print(files)
+    for i in files:
+        print(f"File: {i}")
     return files
