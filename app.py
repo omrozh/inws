@@ -21,8 +21,12 @@ class File(db.Model):
 @app.route("/<filename>", methods=["POST", "GET"])
 def mainPage(filename):
     data = flask.request.get_data()
-    db.session.add(File(filename=filename, filebytes=data))
-    db.session.commit()
+    try:
+        db.session.add(File(filename=filename, filebytes=data))
+        db.session.commit()
+    except:
+        File.query.filter_by(filename=filename).first().filebytes = data
+        db.session.commit()
     return "File Uploaded Successfully"
 
 
