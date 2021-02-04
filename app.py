@@ -11,6 +11,7 @@ db = SQLAlchemy(app)
 
 class File(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    searchtitle = db.Column(db.String)
     filebytes = db.Column(db.LargeBinary, nullable=False)
     filename = db.Column(db.String, unique=True, nullable=False)
 
@@ -22,7 +23,7 @@ class File(db.Model):
 def mainPage(filename):
     data = flask.request.get_data()
     try:
-        db.session.add(File(filename=filename, filebytes=data))
+        db.session.add(File(filename=filename, filebytes=data, searchtitle=filename.lower()))
         db.session.commit()
     except:
         return "Upload Error"
@@ -33,3 +34,10 @@ def mainPage(filename):
 def returnFile(filename):
     file = File.query.filter_by(filename=filename).first()
     return file.filebytes
+
+
+@app.route("/search?query=<searchquery>")
+def returnSearch(searchquery):
+    files = File.query.filter(File.searchtitle.like('%' + searchquery.lower() + '%'))
+
+    return files
