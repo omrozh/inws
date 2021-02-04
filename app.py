@@ -39,4 +39,8 @@ def returnFile(filename):
 @app.route("/search/<searchquery>")
 def returnSearch(searchquery):
     files = File.query.filter(File.searchtitle.like('%' + searchquery.lower() + '%'))
-    return files.join(", ")
+    filesarray = []
+
+    for i in files:
+        filesarray.append(i.filename)
+    return filesarray.join(", ")
