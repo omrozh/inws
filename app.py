@@ -36,8 +36,7 @@ def returnFile(filename):
     return file.filebytes
 
 
-@app.route("/search?query=<searchquery>")
+@app.route("/search/search?query=<searchquery>")
 def returnSearch(searchquery):
     files = File.query.filter(File.searchtitle.like('%' + searchquery.lower() + '%'))
-    print(len(files))
     return files
