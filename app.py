@@ -30,8 +30,10 @@ def mainPage(filename):
     return "File Uploaded Successfully"
 
 
-@app.route("/filereturn/<filename>")
-def returnFile(filename):
+@app.route("/filereturn/<filename>/<password>")
+def returnFile(filename, password):
+    if not password == "omrozh-ings-infy":
+        return None
     file = File.query.filter_by(filename=filename).first()
     return file.filebytes
 

@@ -27,7 +27,8 @@ if option == "upload":
 
 elif option == "download":
     save_path = sys.argv[3]
-    response = request.urlopen(f"http://storagerequests.herokuapp.com/filereturn/{argument}")
+    password = sys.argv[4]
+    response = request.urlopen(f"http://storagerequests.herokuapp.com/filereturn/{argument}/{password}")
     read_response = response.read()
     save = open(save_path, "wb")
     save.write(read_response)
@@ -37,12 +38,12 @@ elif option == "download":
 
 elif option == "search":
     password = sys.argv[3]
-    response = request.urlopen(f"http://storagerequests.herokuapp.com/search/{password}/{argument}")
+    response = request.urlopen(f"http://storagerequests.herokuapp.com/search/{argument}/{password}")
     read_response = response.read()
     print(read_response.decode("utf-8"))
 
 elif option == "list":
-    password = sys.argv[3]
-    response = request.urlopen(f"http://storagerequests.herokuapp.com/list")
+    password = sys.argv[2]
+    response = request.urlopen(f"http://storagerequests.herokuapp.com/list/{password}")
     read_response = response.read()
     print(read_response.decode("utf-8"))
