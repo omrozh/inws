@@ -2,7 +2,12 @@ import sys
 from urllib import request
 
 option = sys.argv[1]
-argument = sys.argv[2]
+
+if not option == "list":
+    argument = sys.argv[2]
+
+else:
+    argument = None
 
 if option == "upload":
     load = open(argument, "rb")
@@ -31,6 +36,13 @@ elif option == "download":
 
 
 elif option == "search":
-    response = request.urlopen(f"http://storagerequests.herokuapp.com/search/{argument}")
+    password = sys.argv[3]
+    response = request.urlopen(f"http://storagerequests.herokuapp.com/search/{password}/{argument}")
     read_response = response.read()
-    print(read_response)
+    print(read_response.decode("utf-8"))
+
+elif option == "list":
+    password = sys.argv[3]
+    response = request.urlopen(f"http://storagerequests.herokuapp.com/list")
+    read_response = response.read()
+    print(read_response.decode("utf-8"))

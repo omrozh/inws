@@ -36,9 +36,24 @@ def returnFile(filename):
     return file.filebytes
 
 
-@app.route("/search/<searchquery>")
-def returnSearch(searchquery):
+@app.route("/search/<searchquery>/<password>")
+def returnSearch(searchquery, password):
+    if not password == "omrozh-ings-infy":
+        return None
     files = File.query.filter(File.searchtitle.like('%' + searchquery.lower() + '%'))
+    filesarray = []
+
+    for i in files:
+        filesarray.append(i.filename)
+    return ", ".join(filesarray)
+
+
+@app.route("/list/<password>")
+def returnList(password):
+    if not password == "omrozh-ings-infy":
+        return None
+
+    files = File.query.all()
     filesarray = []
 
     for i in files:
