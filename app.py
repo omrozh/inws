@@ -64,7 +64,7 @@ def returnList(password):
 
 
 @app.route("/delete/<name>/<password>")
-def returnList(name, password):
+def deleteFile(name, password):
     if not password == "omrozh-ings-infy":
         return None
 

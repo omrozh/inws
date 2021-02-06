@@ -43,13 +43,13 @@ elif option == "search":
     print(read_response.decode("utf-8"))
 
 elif option == "list":
-    password = sys.argv[3]
+    password = sys.argv[2]
     response = request.urlopen(f"http://storagerequests.herokuapp.com/list/{password}")
     read_response = response.read()
     print(read_response.decode("utf-8"))
 
 elif option == "delete":
-    password = sys.argv[2]
+    password = sys.argv[3]
     response = request.urlopen(f"http://storagerequests.herokuapp.com/delete/{argument}/{password}")
     read_response = response.read()
     print(read_response.decode("utf-8"))
