@@ -61,3 +61,14 @@ def returnList(password):
     for i in files:
         filesarray.append(i.filename)
     return ", ".join(filesarray)
+
+
+@app.route("/delete/<name>/<password>")
+def returnList(name, password):
+    if not password == "omrozh-ings-infy":
+        return None
+
+    db.session.delete(File.query.filter_by(filename=name).first())
+    db.session.commit()
+
+    return "File deleted"
