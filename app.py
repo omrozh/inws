@@ -72,3 +72,8 @@ def deleteFile(name, password):
     db.session.commit()
 
     return "File deleted"
+
+
+@app.route("/client/install")
+def clientInstall():
+    return flask.send_file("push.py")

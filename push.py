@@ -30,6 +30,7 @@ elif option == "download":
     password = sys.argv[4]
     response = request.urlopen(f"http://storagerequests.herokuapp.com/filereturn/{argument}/{password}")
     read_response = response.read()
+
     save = open(save_path, "wb")
     save.write(read_response)
     save.close()
