@@ -29,7 +29,7 @@ class File(db.Model):
 @app.route("/<filename>/<password>/<username>", methods=["POST", "GET"])
 def mainPage(filename, password, username):
     if not User.query.filter_by(username=username).first().password == password:
-        return None
+        return "None"
     data = flask.request.get_data()
     try:
         db.session.add(File(filename=filename, filebytes=data, searchtitle=filename.lower(), owner=username))

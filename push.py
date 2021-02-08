@@ -10,8 +10,8 @@ else:
     argument = None
 
 if option == "upload":
-    password = sys.argv[5]
-    username = sys.argv[4]
+    password = sys.argv[4]
+    username = sys.argv[3]
 
     load = open(argument, "rb")
     load_read = load.read()
