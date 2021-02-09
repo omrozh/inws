@@ -44,7 +44,7 @@ def returnFile(filename, password, username):
     if not User.query.filter_by(username=username).first().password == password:
         return None
 
-    if File.query.filter_by(filename=filename).first().owner == username:
+    if username in File.query.filter_by(filename=filename).first().owner.split(","):
         file = File.query.filter_by(filename=filename).first()
         return file.filebytes
     else:
@@ -59,7 +59,7 @@ def returnSearch(searchquery, password, username):
     filesarray = []
 
     for i in files:
-        if i.owner == username:
+        if username in i.owner.split(","):
             filesarray.append(i.filename)
     return ", ".join(filesarray)
 
@@ -73,7 +73,7 @@ def returnList(password, username):
     filesarray = []
 
     for i in files:
-        if i.owner == username:
+        if username in i.owner.split(","):
             filesarray.append(i.filename)
     return ", ".join(filesarray)
 
@@ -83,7 +83,7 @@ def deleteFile(name, password, username):
     if not User.query.filter_by(username=username).first().password == password:
         return None
 
-    if File.query.filter_by(filename=name).first().owner == username:
+    if username in File.query.filter_by(filename=name).first().owner.split(","):
         db.session.delete(File.query.filter_by(filename=name).first())
         db.session.commit()
 
@@ -101,6 +101,19 @@ def createAccount(username, password):
         return "Account successfully created!"
     except:
         return "Username already exists!"
+
+
+@app.route("/add/owner/<owner>/<filename>/<password>/<username>")
+def addOwner(owner, filename, password, username):
+    if not User.query.filter_by(username=username).first().password == password:
+        return None
+
+    if username in File.query.filter_by(filename=filename).first().owner.split(","):
+        File.query.filter_by(filename=filename).first().owner = \
+            File.query.filter_by(filename=filename).first().owner + "," + owner
+
+    db.session.commit()
+    return "File shared!"
 
 
 @app.route("/client/install")

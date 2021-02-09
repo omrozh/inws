@@ -32,10 +32,15 @@ instore(){
     fi
     if [ "$1" = "login" ]
         then clear
-    
+
         password=$3
         username=$2
 
         echo "Logged in as $username"
+    fi
+    if [ "$1" = "addOwner" ]
+        then clear
+        python3 instore addOwner $2 $3 $username $password
+        echo "Adding new owner"
     fi
 }
