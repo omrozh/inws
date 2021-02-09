@@ -105,4 +105,4 @@ def createAccount(username, password):
 
 @app.route("/client/install")
 def clientInstall():
-    return flask.send_file("push.py")
+    return flask.send_file("instore.zip")
