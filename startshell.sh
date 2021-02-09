@@ -24,6 +24,7 @@ instore(){
     fi
     if [ "$1" = "createAccount" ]
         then clear
+        echo "Usernames should not contain special characters or non English letters!"
         python3 instore createAccount $2 $3
     fi
     if [ "$1" = "createAccount" ]

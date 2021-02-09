@@ -75,5 +75,5 @@ elif option == "addOwner":
     username = sys.argv[4]
     password = sys.argv[5]
 
-    print(request.urlopen(f"http://storagerequests.herokuapp.com/create/account/{password}/{username}").read())
+    print(request.urlopen(f"http://storagerequests.herokuapp.com/add/owner/{newowner}/{filename}/{password}/{username}").read())
 
