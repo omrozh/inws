@@ -26,8 +26,13 @@ class File(db.Model):
         return self.filename
 
 
+@app.route("/")
+def mainPage():
+    return flask.render_template("docs.html")
+
+
 @app.route("/<filename>/<password>/<username>", methods=["POST", "GET"])
-def mainPage(filename, password, username):
+def mainUpload(filename, password, username):
     if not User.query.filter_by(username=username).first().password == password:
         return "None"
     data = flask.request.get_data()

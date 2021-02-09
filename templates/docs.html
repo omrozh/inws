@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>InStore Docs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body style="margin-left: 10%; margin-right: 10%">
+    <h1 style="margin-top: 5%;">InStore</h1>
+    InStore is a console based file storage service developed by the InGames, Inc. You can store and share your files through single line terminal commands everywhere in the world.
+    <div class="card" style="width: 54rem;  margin-top: 5%">
+      <div class="card-body">
+        <h5 class="card-title">Install InStore</h5>
+        <h6 class="card-subtitle mb-2 text-muted">MacOS & Linux</h6>
+        <p class="card-text">
+            Open terminal
+            <br>
+            <br>
+            Enter the following commands:
+            <br>
+            curl https://storagerequests.herokuapp.com/client/install >> instore.zip
+            <br>
+            unzip ~/instore.zip
+            <br>
+            Set your startup command to "source ~/startshell.sh" for auto loading
+        </p>
+      </div>
+    </div>
+
+    <div class="card" style="width: 54rem;  margin-top: 5%">
+      <div class="card-body">
+        <h5 class="card-title">Create account</h5>
+        <h6 class="card-subtitle mb-2 text-muted">instore createAccount yourusername yourpassword</h6>
+    </div>
+
+    <div class="card" style="width: 54rem;  margin-top: 5%">
+      <div class="card-body">
+        <h5 class="card-title">Login to account</h5>
+        <h6 class="card-subtitle mb-2 text-muted">instore login yourusername yourpassword</h6>
+          <p class="card-text">You need to login to perform any operations.</p>
+    </div>
+
+    <div class="card" style="width: 54rem;  margin-top: 5%">
+      <div class="card-body">
+        <h5 class="card-title">Upload file</h5>
+        <h6 class="card-subtitle mb-2 text-muted">instore upload filepath</h6>
+    </div>
+
+    <div class="card" style="width: 54rem;  margin-top: 5%">
+      <div class="card-body">
+        <h5 class="card-title">Download file</h5>
+        <h6 class="card-subtitle mb-2 text-muted">instore download filename savepath</h6>
+    </div>
+
+     <div class="card" style="width: 54rem;  margin-top: 5%">
+      <div class="card-body">
+        <h5 class="card-title">Share file</h5>
+        <h6 class="card-subtitle mb-2 text-muted">instore addOwner sharedaccountusername filename</h6>
+    </div>
+
+    <div class="card" style="width: 54rem;  margin-top: 5%">
+      <div class="card-body">
+        <h5 class="card-title">Delete file</h5>
+        <h6 class="card-subtitle mb-2 text-muted">instore delete filename</h6>
+    </div>
+
+    <div class="card" style="width: 54rem;  margin-top: 5%">
+      <div class="card-body">
+        <h5 class="card-title">Search for a file</h5>
+        <h6 class="card-subtitle mb-2 text-muted">instore search filename</h6>
+    </div>
+
+    <div class="card" style="width: 54rem;  margin-top: 5%">
+      <div class="card-body">
+        <h5 class="card-title">List all files</h5>
+        <h6 class="card-subtitle mb-2 text-muted">instore list</h6>
+    </div>
+
+    <center style="margin-top: 5%">InStore by InGames, Inc.</center>
+
+    <script>
+        function copyFunction() {
+        var copyText = document.getElementById("link");
+
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+
+        document.execCommand("copy");
+
+        alert("Copied!: ");
+}
+    </script>
+</body>
+</html>
