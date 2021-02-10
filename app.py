@@ -67,7 +67,10 @@ def returnSearch(searchquery, password, username):
 
     for i in files:
         if username in i.owner.split(","):
-            filesarray.append(i.filename.replace("*" + username, ""))
+            if i.owner.split(",").index(username) == 0:
+                filesarray.append(i.filename.replace("*" + username, ""))
+            elif i.owner.split(",").index(username) != 0:
+                filesarray.append(i.filename)
     return ", ".join(filesarray)
 
 
@@ -81,7 +84,10 @@ def returnList(password, username):
 
     for i in files:
         if username in i.owner.split(","):
-            filesarray.append(i.filename.replace("*" + username, ""))
+            if i.owner.split(",").index(username) == 0:
+                filesarray.append(i.filename.replace("*" + username, ""))
+            elif i.owner.split(",").index(username) != 0:
+                filesarray.append(i.filename)
     return ", ".join(filesarray)
 
 
