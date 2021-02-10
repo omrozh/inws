@@ -1,5 +1,6 @@
 import sys
 from urllib import request
+import os
 
 option = sys.argv[1]
 
@@ -13,21 +14,41 @@ if option == "upload":
     password = sys.argv[4]
     username = sys.argv[3]
 
-    load = open(argument, "rb")
-    load_read = load.read()
+    if os.path.isfile(argument):
+        load = open(argument, "rb")
+        load_read = load.read()
 
-    print("Reading file.")
+        print("Reading file.")
 
-    req = request.Request(f"http://storagerequests.herokuapp.com/"
-                          f"{input('Filename: ')}/{password}/{username}", data=load_read)
+        req = request.Request(f"http://storagerequests.herokuapp.com/"
+                              f"{input('Filename: ')}/{password}/{username}", data=load_read)
 
-    print("POST Request is formed.")
-    response = request.urlopen(req)
+        print("POST Request is formed.")
+        response = request.urlopen(req)
 
-    print("Process completed. Response received from the server.")
+        print("Process completed. Response received from the server.")
 
-    response_read = response.read()
-    print(response_read.decode("utf-8"))
+        response_read = response.read()
+        print(response_read.decode("utf-8"))
+
+    if os.path.isdir(argument):
+        print("Uploading Directory")
+        for i in range(len(os.listdir(argument))):
+            load = open(argument + f"/{os.listdir(argument)[i]}", "rb")
+            load_read = load.read()
+
+            print("Reading file: " + os.listdir(argument)[i])
+
+            req = request.Request(f"http://storagerequests.herokuapp.com/"
+                                  f"{os.listdir(argument)[i]}/{password}/{username}", data=load_read)
+
+            print("POST Request is formed.")
+            response = request.urlopen(req)
+
+            print("Process completed. Response received from the server.")
+
+            response_read = response.read()
+            print(response_read.decode("utf-8"))
 
 elif option == "download":
     save_path = sys.argv[3]
