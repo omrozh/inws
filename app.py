@@ -97,12 +97,14 @@ def returnList(password, username):
 def deleteFile(name, password, username):
     if not User.query.filter_by(username=username).first().password == password:
         return None
-
-    if username in File.query.filter_by(filename=name + "*" + username).first().owner.split(","):
+    ownerdata = File.query.filter_by(filename=name + "*" + username).first().owner.split(",")
+    if username in ownerdata and ownerdata.index(username) == 0:
         db.session.delete(File.query.filter_by(filename=name).first())
         db.session.commit()
 
         return "File deleted"
+    else:
+        return "You are not authorized to delete this file."
 
     else:
         return "Unauthorized!"
