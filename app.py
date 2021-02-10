@@ -106,9 +106,6 @@ def deleteFile(name, password, username):
     else:
         return "You are not authorized to delete this file."
 
-    else:
-        return "Unauthorized!"
-
 
 @app.route("/create/account/<password>/<username>")
 def createAccount(username, password):
