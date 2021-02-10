@@ -126,8 +126,8 @@ def addOwner(owner, filename, password, username):
         return None
 
     if username in File.query.filter_by(filename=filename + "*" + username).first().owner.split(","):
-        File.query.filter_by(filename=filename).first().owner = \
-            File.query.filter_by(filename=filename).first().owner + "," + owner
+        File.query.filter_by(filename=filename + "*" + username).first().owner = \
+            File.query.filter_by(filename=filename + "*" + username).first().owner + "," + owner
 
     db.session.commit()
     return "File shared!"
