@@ -56,6 +56,9 @@ def returnFile(filename, password, username):
     if not User.query.filter_by(username=username).first().password == password:
         return None
 
+    if "*" in filename and username in File.query.filter_by(filename=filename).first().owner.split(","):
+        return File.query.filter_by(filename=filename).first().filebytes
+
     if username in File.query.filter_by(filename=filename + "*" + username).first().owner.split(","):
         file = File.query.filter_by(filename=filename + "*" + username).first()
         return file.filebytes
