@@ -35,9 +35,11 @@ def mainPage():
 def mainUpload(filename, password, username):
     if not User.query.filter_by(username=username).first().password == password:
         return "None"
+    if "*" in filename:
+        return "You cannot put * in filename."
     data = flask.request.get_data()
     try:
-        db.session.add(File(filename=filename, filebytes=data, searchtitle=filename.lower(), owner=username))
+        db.session.add(File(filename=filename + "*" + username, filebytes=data, searchtitle=filename.lower(), owner=username))
         db.session.commit()
     except:
         return "Upload Error"
@@ -49,8 +51,8 @@ def returnFile(filename, password, username):
     if not User.query.filter_by(username=username).first().password == password:
         return None
 
-    if username in File.query.filter_by(filename=filename).first().owner.split(","):
-        file = File.query.filter_by(filename=filename).first()
+    if username in File.query.filter_by(filename=filename + "*" + username).first().owner.split(","):
+        file = File.query.filter_by(filename=filename + "*" + username).first()
         return file.filebytes
     else:
         return "None"
@@ -65,7 +67,7 @@ def returnSearch(searchquery, password, username):
 
     for i in files:
         if username in i.owner.split(","):
-            filesarray.append(i.filename)
+            filesarray.append(i.filename.replace("*" + username, ""))
     return ", ".join(filesarray)
 
 
@@ -79,7 +81,7 @@ def returnList(password, username):
 
     for i in files:
         if username in i.owner.split(","):
-            filesarray.append(i.filename)
+            filesarray.append(i.filename.replace("*" + username, ""))
     return ", ".join(filesarray)
 
 
@@ -88,7 +90,7 @@ def deleteFile(name, password, username):
     if not User.query.filter_by(username=username).first().password == password:
         return None
 
-    if username in File.query.filter_by(filename=name).first().owner.split(","):
+    if username in File.query.filter_by(filename=name + "*" + username).first().owner.split(","):
         db.session.delete(File.query.filter_by(filename=name).first())
         db.session.commit()
 
@@ -113,7 +115,7 @@ def addOwner(owner, filename, password, username):
     if not User.query.filter_by(username=username).first().password == password:
         return None
 
-    if username in File.query.filter_by(filename=filename).first().owner.split(","):
+    if username in File.query.filter_by(filename=filename + "*" + username).first().owner.split(","):
         File.query.filter_by(filename=filename).first().owner = \
             File.query.filter_by(filename=filename).first().owner + "," + owner
 
