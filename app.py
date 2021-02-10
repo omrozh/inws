@@ -46,7 +46,7 @@ def mainUpload(filename, password, username):
         else:
             File.query.filter_by(filename=filename + "*" + username).first().filebytes = data
             db.session.commit()
-    except:
+    except OSError:
         return "File cannot be uploaded due to an unknown problem."
     return "File Uploaded Successfully"
 
