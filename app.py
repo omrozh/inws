@@ -123,4 +123,4 @@ def addOwner(owner, filename, password, username):
 
 @app.route("/client/install")
 def clientInstall():
-    return flask.send_file("instore.zip")
+    return flask.send_file("inws.zip")
