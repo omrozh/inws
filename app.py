@@ -102,7 +102,7 @@ def deleteFile(name, password, username):
         return None
     ownerdata = File.query.filter_by(filename=name + "*" + username).first().owner.split(",")
     if username in ownerdata and ownerdata.index(username) == 0:
-        db.session.delete(File.query.filter_by(filename=name).first())
+        db.session.delete(File.query.filter_by(filename=name + "*" + username).first())
         db.session.commit()
 
         return "File deleted"
