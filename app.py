@@ -39,10 +39,12 @@ def mainUpload(filename, password, username):
         return "You cannot put * in filename."
     data = flask.request.get_data()
     try:
-        db.session.add(File(filename=filename + "*" + username, filebytes=data, searchtitle=filename.lower(), owner=username))
+        db.session.add(File(filename=filename + "*" + username, filebytes=data, searchtitle=filename.lower(),
+                            owner=username))
         db.session.commit()
     except:
-        return "Upload Error"
+        File.query.filter_by(filename + "*" + username).first().filebytes = data
+        db.session.commit()
     return "File Uploaded Successfully"
 
 
