@@ -43,10 +43,7 @@ def mainUpload(filename, password, username):
                             owner=username))
         db.session.commit()
     except:
-        db.session.delete(File.query.filter_by(filename=filename + "*" + username).first())
-        db.session.commit()
-        db.session.add(File(filename=filename + "*" + username, filebytes=data, searchtitle=filename.lower(),
-                            owner=username))
+        File.query.filter_by(filename=filename + "*" + username).first().filebytes = data
         db.session.commit()
     return "File Uploaded Successfully"
 
