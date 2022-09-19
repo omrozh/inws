@@ -1,7 +1,7 @@
 password=""
 username=""
 
-instore(){
+inws(){
     if [ "$1" = "download" ]
         then echo "Download"
         python3 instore download $2 $3 $username $password
