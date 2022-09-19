@@ -20,7 +20,7 @@ if option == "upload":
 
         print("Reading file.")
 
-        req = request.Request(f"http://storagerequests.herokuapp.com/"
+        req = request.Request(f"http://192.46.235.236/"
                               f"{input('Filename: ')}/{password}/{username}", data=load_read)
 
         print("POST Request is formed.")
@@ -39,7 +39,7 @@ if option == "upload":
 
             print("Reading file: " + os.listdir(argument)[i])
 
-            req = request.Request(f"http://storagerequests.herokuapp.com/"
+            req = request.Request(f"http://192.46.235.236/"
                                   f"{os.listdir(argument)[i]}/{password}/{username}", data=load_read)
 
             print("POST Request is formed.")
@@ -54,7 +54,7 @@ elif option == "download":
     save_path = sys.argv[3]
     password = sys.argv[5]
     username = sys.argv[4]
-    response = request.urlopen(f"http://storagerequests.herokuapp.com/filereturn/{argument}/{password}/{username}")
+    response = request.urlopen(f"http://192.46.235.236/filereturn/{argument}/{password}/{username}")
     read_response = response.read()
 
     save = open(save_path, "wb")
@@ -66,21 +66,21 @@ elif option == "download":
 elif option == "search":
     password = sys.argv[4]
     username = sys.argv[3]
-    response = request.urlopen(f"http://storagerequests.herokuapp.com/search/{argument}/{password}/{username}")
+    response = request.urlopen(f"http://192.46.235.236/search/{argument}/{password}/{username}")
     read_response = response.read()
     print(read_response.decode("utf-8"))
 
 elif option == "list":
     password = sys.argv[3]
     username = sys.argv[2]
-    response = request.urlopen(f"http://storagerequests.herokuapp.com/list/{password}/{username}")
+    response = request.urlopen(f"http://192.46.235.236/list/{password}/{username}")
     read_response = response.read()
     print(read_response.decode("utf-8"))
 
 elif option == "delete":
     password = sys.argv[4]
     username = sys.argv[3]
-    response = request.urlopen(f"http://storagerequests.herokuapp.com/delete/{argument}/{password}/{username}")
+    response = request.urlopen(f"http://192.46.235.236/delete/{argument}/{password}/{username}")
     read_response = response.read()
     print(read_response.decode("utf-8"))
 
@@ -88,7 +88,7 @@ elif option == "createAccount":
     username = argument
     password = sys.argv[3]
 
-    print(request.urlopen(f"http://storagerequests.herokuapp.com/create/account/{password}/{username}").read())
+    print(request.urlopen(f"http://192.46.235.236/create/account/{password}/{username}").read())
 
 elif option == "addOwner":
     newowner = argument
@@ -96,5 +96,5 @@ elif option == "addOwner":
     username = sys.argv[4]
     password = sys.argv[5]
 
-    print(request.urlopen(f"http://storagerequests.herokuapp.com/add/owner/{newowner}/{filename}/{password}/{username}").read())
+    print(request.urlopen(f"http://192.46.235.236/add/owner/{newowner}/{filename}/{password}/{username}").read())
 
